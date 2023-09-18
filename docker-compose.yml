@@ -1,0 +1,54 @@
+version: "3.8"
+
+
+services:
+
+      #
+      # docker compose--profile microservices up
+      #
+  reverse-proxy:
+    container_name: proxy
+    hostname: proxy
+    image: nginx:alpine
+    ports:
+      - '8080:8080'
+    volumes:
+      - './docker/nginx.conf:/etc/nginx/nginx.conf'
+    profiles:
+      - microservices
+  consul:
+    container_name: consul
+    hostname: consul
+    image: hashicorp/consul:latest
+    ports:
+      - '8500:8500'
+  postgres:
+    container_name: postgres
+    hostname: postgres
+    image: postgres:15-alpine
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: secret
+    ports:
+      - '5432:5432'
+    volumes:
+      - 'pgdata:/var/lib/postgresql/data'
+      - './docker/database:/docker-entrypoint-initdb.d'
+  nats:
+    container_name: nats
+    hostname: nats
+    image: nats:2-alpine
+    ports:
+      - '4222:4222'
+    command:
+      - -js
+      - -sd
+      - /var/lib/nats/data
+    volumes:
+      - 'jsdata:/var/lib/nats/data'
+volumes:
+  pgdata:
+  jsdata:
+
+
+
