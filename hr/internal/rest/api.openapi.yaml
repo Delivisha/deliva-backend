@@ -1,0 +1,33 @@
+openapiOptions:
+  file:
+    - file: "hrpb/api.proto"
+      option:
+        info:
+          title: Hr
+          version: "1.0.0"
+        basePath: /
+  method:
+    - method: hrpb.HrService.CreateEmployee
+      option:
+        operationId: createEmployee
+        tags:
+          - Hr
+        summary: Create a new employee
+    - method: hrpb.HrService.SuspendEmployee
+      option:
+        operationId: suspendEmployee
+        tags:
+          - Hr
+        summary: Suspend an  Employee
+    - method: hrpb.HrService.UnsuspendEmployee
+      option:
+        operationId: unsuspendEmployee
+        tags:
+          - Hr
+        summary: Unsuspend an  Employee
+    - method: hrpb.HrService.SackEmployee
+      option:
+        operationId: sackEmployee
+        tags:
+          - Hr
+        summary: Sack an employee

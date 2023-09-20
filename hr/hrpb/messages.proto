@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package hrpb;
+
+// events
+
+message DepartmentCreated {
+  string id = 1;
+  string name = 2;
+  string head_of_department = 3;
+  int32 number_of_employees = 4;
+  repeated DepartmentProject projects = 6;
+}
+message ProjectCreated {
+  DepartmentProject project = 1;
+}
+message DepartmentProject {
+  string id = 1;
+  string name = 2;
+  string duration = 3;
+  int32 number_of_employees = 4;
+  int32  budget = 5;
+  string resources = 6;
+}
+
+message EmployeeCreated {
+  string id = 1;
+  string first_name = 2;
+  string middle_name = 3;
+  string last_name = 4;
+  string date_of_birth = 5;
+  string home_address = 6;
+  string phone_number = 7;
+  string bank = 8;
+  string account_number = 9;
+  int32 gross_salary = 10;
+  string Department  = 11;
+  string Country = 12;
+  bool suspended = 13;
+  bool sacked = 14;
+}
+
+message EmployeeSuspended {
+  string id = 1;
+  string reason = 2;
+  string duration = 3;
+}
+
+message EmployeeUnsuspended {
+  string id = 1;
+}
+message EmployeeSacked {
+  string id = 1;
+  string reason = 2;
+}
+
+
+
+// commands

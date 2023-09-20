@@ -1,0 +1,18 @@
+type: google.api.Service
+config_version: 3
+http:
+  rules:
+    - selector: hrpb.HrService.CreateEmployee
+      post: /api/hr
+      body: "*"
+    - selector: hrpb.HrService.SuspendEmployee
+      put: /api/hr/{id}/suspend
+      body: "*"
+    - selector: hrpb.HrService.UnsuspendEmployee
+      put: /api/hr/{id}/unsuspend
+      body: "*"
+    - selector: hrpb.HrService.SackEmployee
+      put: /api/hr/{id}/sack
+      body: "*"
+    - selector: hrpb.HrService.GetEmployeeById
+      get: /api/hr/{id}

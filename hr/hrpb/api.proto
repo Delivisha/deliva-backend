@@ -1,0 +1,91 @@
+syntax = "proto3";
+
+package hrpb;
+
+service HrService {
+  rpc CreateEmployee(CreateEmployeeRequest) returns (CreateEmployeeResponse) {}
+  rpc CreateDepartment(CreateDepartmentRequest) returns (CreateDepartmentResponse) {}
+  rpc SuspendEmployee(SuspendEmployeeRequest) returns (SuspendEmployeeResponse) {}
+  rpc SackEmployee(SackEmployeeRequest) returns (SackEmployeeResponse) {}
+  rpc UnsuspendEmployee(UnsuspendEmployeeRequest) returns (UnsuspendEmployeeResponse) {}
+  rpc GetEmployeeById(GetEmployeeRequest) returns (GetEmployeeResponse) {}
+//  rpc GetAllEmployees(GetAllEmployeesRequest) returns (GetAllEmployeesResponse) {}
+//  rpc GetEmployeeByDepartment(GetEmployeeByDepartmentRequest) returns (GetEmployeeByDepartmentResponse) {}
+//  rpc GetEmployeesByGender(GetEmployeesByGenderRequest) returns (GetEmployeesByGenderResponse) {}
+}
+
+message CreateDepartmentRequest {
+  Department department = 1;
+}
+
+message CreateDepartmentResponse {
+  string id = 1;
+}
+
+message CreateEmployeeRequest {
+  Employee employee = 1;
+
+}
+message  CreateEmployeeResponse {
+  string id = 1;
+}
+message SuspendEmployeeRequest {
+  string id = 1;
+  string reason = 2;
+  string duration = 3;
+}
+message SuspendEmployeeResponse {
+  bool success = 1;
+}
+message UnsuspendEmployeeRequest {
+  string id = 1;
+}
+message UnsuspendEmployeeResponse {
+  bool success = 1;
+}
+message SackEmployeeRequest {
+  string id = 1;
+  string reason = 2;
+}
+message SackEmployeeResponse {
+  bool success = 1;
+}
+message GetEmployeeRequest {
+  string id = 1;
+}
+message GetEmployeeResponse {
+  Employee employee = 1;
+}
+
+message Department {
+  string id = 1;
+  string name = 2;
+  string head_of_department = 3;
+  int32 number_of_employees = 4;
+  repeated Project projects = 6;
+}
+
+message Project {
+  string id = 1;
+  string name = 2;
+  string duration = 3;
+  int32 number_of_employees = 4;
+  int32  budget = 5;
+  string resources = 6;
+}
+message Employee{
+  string id = 1;
+  string first_name = 2;
+  string middle_name = 3;
+  string last_name = 4;
+  string date_of_birth = 5;
+  string home_address = 6;
+  string phone_number = 7;
+  string bank = 8;
+  string account_number = 9;
+  int32 gross_salary = 10;
+  string Department  = 11;
+  string Country = 12;
+  bool suspended = 13;
+  bool sacked = 14;
+}

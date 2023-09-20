@@ -1,0 +1,398 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Hr",
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "HrService"
+    }
+  ],
+  "basePath": "/",
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/hr": {
+      "post": {
+        "summary": "Create a new employee",
+        "operationId": "createEmployee",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/hrpbCreateEmployeeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/hrpbCreateEmployeeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Hr"
+        ]
+      }
+    },
+    "/api/hr/{id}": {
+      "get": {
+        "operationId": "HrService_GetEmployeeById",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/hrpbGetEmployeeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "HrService"
+        ]
+      }
+    },
+    "/api/hr/{id}/sack": {
+      "put": {
+        "summary": "Sack an employee",
+        "operationId": "sackEmployee",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/hrpbSackEmployeeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "reason": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Hr"
+        ]
+      }
+    },
+    "/api/hr/{id}/suspend": {
+      "put": {
+        "summary": "Suspend an  Employee",
+        "operationId": "suspendEmployee",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/hrpbSuspendEmployeeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "reason": {
+                  "type": "string"
+                },
+                "duration": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "Hr"
+        ]
+      }
+    },
+    "/api/hr/{id}/unsuspend": {
+      "put": {
+        "summary": "Unsuspend an  Employee",
+        "operationId": "unsuspendEmployee",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/hrpbUnsuspendEmployeeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "tags": [
+          "Hr"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "hrpbCreateDepartmentResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "hrpbCreateEmployeeRequest": {
+      "type": "object",
+      "properties": {
+        "employee": {
+          "$ref": "#/definitions/hrpbEmployee"
+        }
+      }
+    },
+    "hrpbCreateEmployeeResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "hrpbDepartment": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "headOfDepartment": {
+          "type": "string"
+        },
+        "numberOfEmployees": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "projects": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/hrpbProject"
+          }
+        }
+      }
+    },
+    "hrpbEmployee": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "middleName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "dateOfBirth": {
+          "type": "string"
+        },
+        "homeAddress": {
+          "type": "string"
+        },
+        "phoneNumber": {
+          "type": "string"
+        },
+        "bank": {
+          "type": "string"
+        },
+        "accountNumber": {
+          "type": "string"
+        },
+        "grossSalary": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "Department": {
+          "type": "string"
+        },
+        "Country": {
+          "type": "string"
+        },
+        "suspended": {
+          "type": "boolean"
+        },
+        "sacked": {
+          "type": "boolean"
+        }
+      }
+    },
+    "hrpbGetEmployeeResponse": {
+      "type": "object",
+      "properties": {
+        "employee": {
+          "$ref": "#/definitions/hrpbEmployee"
+        }
+      }
+    },
+    "hrpbProject": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "duration": {
+          "type": "string"
+        },
+        "numberOfEmployees": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "budget": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "resources": {
+          "type": "string"
+        }
+      }
+    },
+    "hrpbSackEmployeeResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        }
+      }
+    },
+    "hrpbSuspendEmployeeResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        }
+      }
+    },
+    "hrpbUnsuspendEmployeeResponse": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}
