@@ -1,7 +1,7 @@
 package es
 
 import (
-	"coolmarket/internal/ddd"
+	"deliva/internal/ddd"
 	"fmt"
 )
 

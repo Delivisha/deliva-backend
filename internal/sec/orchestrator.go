@@ -2,8 +2,8 @@ package sec
 
 import (
 	"context"
-	"coolmarket/internal/am"
-	"coolmarket/internal/ddd"
+	"deliva/internal/am"
+	"deliva/internal/ddd"
 	"github.com/stackus/errors"
 )
 

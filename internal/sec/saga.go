@@ -1,6 +1,6 @@
 package sec
 
-import "coolmarket/internal/am"
+import "deliva/internal/am"
 
 const (
 	SagaCommandIDHdr   = am.CommandHdrPrefix + "SAGA_ID"

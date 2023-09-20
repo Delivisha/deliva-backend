@@ -2,7 +2,7 @@ package am
 
 import (
 	"context"
-	"coolmarket/internal/ddd"
+	"deliva/internal/ddd"
 	"time"
 )
 

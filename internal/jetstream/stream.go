@@ -2,7 +2,7 @@ package jetstream
 
 import (
 	"context"
-	"coolmarket/internal/am"
+	"deliva/internal/am"
 	"github.com/nats-io/nats.go"
 	"github.com/rs/zerolog"
 	"google.golang.org/protobuf/proto"

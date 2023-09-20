@@ -1,6 +1,6 @@
 package es
 
-import "coolmarket/internal/ddd"
+import "deliva/internal/ddd"
 
 type (
 	Versioner interface {

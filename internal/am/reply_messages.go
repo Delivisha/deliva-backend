@@ -2,8 +2,8 @@ package am
 
 import (
 	"context"
-	"coolmarket/internal/ddd"
-	"coolmarket/internal/registry"
+	"deliva/internal/ddd"
+	"deliva/internal/registry"
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/known/timestamppb"
 	"time"

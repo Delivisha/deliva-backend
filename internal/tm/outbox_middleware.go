@@ -2,7 +2,7 @@ package tm
 
 import (
 	"context"
-	"coolmarket/internal/am"
+	"deliva/internal/am"
 	"github.com/stackus/errors"
 )
 

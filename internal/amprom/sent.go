@@ -2,7 +2,7 @@ package amprom
 
 import (
 	"context"
-	"coolmarket/internal/am"
+	"deliva/internal/am"
 	"fmt"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"

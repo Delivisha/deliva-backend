@@ -1,7 +1,7 @@
 package ddd
 
 import (
-	"coolmarket/internal/registry"
+	"deliva/internal/registry"
 	"fmt"
 )
 

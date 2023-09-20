@@ -2,10 +2,10 @@ package postgres
 
 import (
 	"context"
-	"coolmarket/internal/ddd"
-	"coolmarket/internal/es"
-	"coolmarket/internal/registry"
 	"database/sql"
+	"deliva/internal/ddd"
+	"deliva/internal/es"
+	"deliva/internal/registry"
 	"fmt"
 	"strings"
 	"time"

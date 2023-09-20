@@ -2,8 +2,8 @@ package es
 
 import (
 	"context"
-	"coolmarket/internal/ddd"
-	"coolmarket/internal/registry"
+	"deliva/internal/ddd"
+	"deliva/internal/registry"
 	"fmt"
 )
 

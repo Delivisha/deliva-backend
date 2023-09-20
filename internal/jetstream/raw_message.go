@@ -1,8 +1,8 @@
 package jetstream
 
 import (
-	"coolmarket/internal/am"
-	"coolmarket/internal/ddd"
+	"deliva/internal/am"
+	"deliva/internal/ddd"
 	"time"
 )
 

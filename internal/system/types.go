@@ -2,9 +2,9 @@ package system
 
 import (
 	"context"
-	"coolmarket/internal/config"
-	"coolmarket/internal/waiter"
 	"database/sql"
+	"deliva/internal/config"
+	"deliva/internal/waiter"
 	"github.com/go-chi/chi/v5"
 	"github.com/nats-io/nats.go"
 	"github.com/rs/zerolog"

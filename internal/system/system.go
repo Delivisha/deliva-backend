@@ -2,10 +2,10 @@ package system
 
 import (
 	"context"
-	"coolmarket/internal/config"
-	"coolmarket/internal/logger"
-	"coolmarket/internal/waiter"
 	"database/sql"
+	"deliva/internal/config"
+	"deliva/internal/logger"
+	"deliva/internal/waiter"
 	"fmt"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"

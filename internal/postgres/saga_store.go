@@ -2,8 +2,8 @@ package postgres
 
 import (
 	"context"
-	"coolmarket/internal/registry"
-	"coolmarket/internal/sec"
+	"deliva/internal/registry"
+	"deliva/internal/sec"
 	"fmt"
 )
 

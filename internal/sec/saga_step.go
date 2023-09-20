@@ -2,7 +2,7 @@ package sec
 
 import (
 	"context"
-	"coolmarket/internal/ddd"
+	"deliva/internal/ddd"
 )
 
 type (

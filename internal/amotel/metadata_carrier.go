@@ -1,7 +1,7 @@
 package amotel
 
 import (
-	"coolmarket/internal/ddd"
+	"deliva/internal/ddd"
 	"fmt"
 	"go.opentelemetry.io/otel/propagation"
 	"strconv"

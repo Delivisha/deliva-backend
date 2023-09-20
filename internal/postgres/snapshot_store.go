@@ -2,9 +2,9 @@ package postgres
 
 import (
 	"context"
-	"coolmarket/internal/es"
-	"coolmarket/internal/registry"
 	"database/sql"
+	"deliva/internal/es"
+	"deliva/internal/registry"
 	"errors"
 	"fmt"
 )

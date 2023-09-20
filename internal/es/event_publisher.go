@@ -2,7 +2,7 @@ package es
 
 import (
 	"context"
-	"coolmarket/internal/ddd"
+	"deliva/internal/ddd"
 )
 
 type EventPublisher struct {

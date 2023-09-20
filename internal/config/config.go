@@ -1,8 +1,8 @@
 package config
 
 import (
-	"coolmarket/internal/rpc"
-	"coolmarket/internal/web"
+	"deliva/internal/rpc"
+	"deliva/internal/web"
 	"github.com/kelseyhightower/envconfig"
 	"github.com/stackus/dotenv"
 	"os"

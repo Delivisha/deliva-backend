@@ -2,8 +2,8 @@ package postgres
 
 import (
 	"context"
-	"coolmarket/internal/am"
-	"coolmarket/internal/tm"
+	"deliva/internal/am"
+	"deliva/internal/tm"
 	"encoding/json"
 	"fmt"
 	"github.com/jackc/pgconn"

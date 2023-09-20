@@ -1,7 +1,7 @@
 package es
 
 import (
-	"coolmarket/internal/registry"
+	"deliva/internal/registry"
 	"fmt"
 )
 

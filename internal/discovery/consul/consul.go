@@ -2,7 +2,7 @@ package consul
 
 import (
 	"context"
-	"coolmarket/internal/discovery"
+	"deliva/internal/discovery"
 	"errors"
 	"fmt"
 	consul "github.com/hashicorp/consul/api"

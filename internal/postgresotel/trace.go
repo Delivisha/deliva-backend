@@ -2,8 +2,8 @@ package postgresotel
 
 import (
 	"context"
-	"coolmarket/internal/postgres"
 	"database/sql"
+	"deliva/internal/postgres"
 	"github.com/jackc/pgconn"
 	"github.com/stackus/errors"
 	"go.opentelemetry.io/otel/attribute"

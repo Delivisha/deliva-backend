@@ -2,7 +2,7 @@ package amotel
 
 import (
 	"context"
-	"coolmarket/internal/am"
+	"deliva/internal/am"
 	"go.opentelemetry.io/otel/baggage"
 	"go.opentelemetry.io/otel/codes"
 	"go.opentelemetry.io/otel/trace"

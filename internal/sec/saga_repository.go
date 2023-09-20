@@ -2,7 +2,7 @@ package sec
 
 import (
 	"context"
-	"coolmarket/internal/registry"
+	"deliva/internal/registry"
 	"github.com/stackus/errors"
 )
 
