@@ -1,22 +1,51 @@
 -- +goose Up
+CREATE TABLE departments (
+    id                  text NOT NULL,
+    name                text NOT NULL,
+    head_of_department  text NOT NULL,
+    number_of_employees text NULL,
+    created_at          timestamptz   NOT NULL DEFAULT NOW(),
+    updated_at          timestamptz   NOT NULL DEFAULT NOW(),
+    PRIMARY KEY (id)
+);
+
 CREATE TABLE employees (
     id              text NOT NULL,
+    dept_id         text NOT NULL,
     first_name      text NOT NULL,
     middle_name     text NOT NULL,
     last_name       text NOT NULL,
+    email           text NOT NULL,
     date_of_birth   date NOT NULL,
     home_address    text NOT NULL,
     phone_number    text NOT NULL,
     bank            text NOT NULL,
     account_number  text NOT NULL,
     gross_salary    numeric NOT NULL,
-    department      text NOT NULL,
     country         text NOT NULL,
     suspended       bool NOT NULL,
     sacked          bool NOT NULL,
     created_at      timestamptz NOT NULL DEFAULT NOW(),
     updated_at      timestamptz NOT NULL DEFAULT NOW(),
-    PRIMARY KEY(id)
+    PRIMARY KEY(id),
+    CONSTRAINT FK_employee_department FOREIGN KEY(dept_id)
+        REFERENCES departments(id)
+);
+
+
+CREATE TABLE projects (
+    id              text NOT NULL,
+    dept_id   text NOT NULL,
+    name            text NOT NULL,
+    duration        text NOT NULL,
+    employee_id     text NOT NULL,
+    budget          numeric NULL,
+    resource        text NOT NULL,
+    created_at  timestamptz   NOT NULL DEFAULT NOW(),
+    updated_at  timestamptz   NOT NULL DEFAULT NOW(),
+    PRIMARY KEY (id),
+    CONSTRAINT FK_project_department FOREIGN KEY(dept_id)
+        REFERENCES departments(id)
 );
 
 CREATE TRIGGER created_at_employees_trgr
@@ -96,7 +125,9 @@ CREATE TRIGGER updated_at_sagas_trgr
 EXECUTE PROCEDURE updated_at_trigger();
 
 -- +goose Down
+DROP TABLE IF EXISTS departments;
 DROP TABLE IF EXISTS employees;
+DROP TABLE IF EXISTS projects;
 
 DROP TABLE IF EXISTS sagas;
 DROP TABLE IF EXISTS outbox;

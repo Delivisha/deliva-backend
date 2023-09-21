@@ -276,6 +276,9 @@
         "lastName": {
           "type": "string"
         },
+        "email": {
+          "type": "string"
+        },
         "dateOfBirth": {
           "type": "string"
         },

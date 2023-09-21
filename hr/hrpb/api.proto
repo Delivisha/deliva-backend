@@ -78,14 +78,15 @@ message Employee{
   string first_name = 2;
   string middle_name = 3;
   string last_name = 4;
-  string date_of_birth = 5;
-  string home_address = 6;
-  string phone_number = 7;
-  string bank = 8;
-  string account_number = 9;
-  int32 gross_salary = 10;
-  string Department  = 11;
-  string Country = 12;
-  bool suspended = 13;
-  bool sacked = 14;
+  string email = 5;
+  string date_of_birth = 6;
+  string home_address = 7;
+  string phone_number = 8;
+  string bank = 9;
+  string account_number = 10;
+  int32 gross_salary = 11;
+  string Department  = 12;
+  string Country = 13;
+  bool suspended = 14;
+  bool sacked = 15;
 }
