@@ -37,3 +37,68 @@ type Employee struct {
 var (
 	ErrFirstNameCannotBeBlank = errors.Wrap(errors.ErrBadRequest, "the employee  first name cannot be blank")
 )
+
+func NewEmployee(id string) *Employee {
+	return &Employee{
+		Aggregate: ddd.NewAggregate(id, EmployeeAggregate),
+	}
+}
+
+func CreateEmployee(id, firstName, middleName, lastName, gender, dateOfBirth, email, homeAddress, phoneNumber, bank, accountNumber string, grossSalary int32, nextOfKinName, nextOfKinPhone, referenceName, referencePhone, deptId, country, password string) (*Employee, error) {
+	if firstName == "" {
+		return nil, ErrFirstNameCannotBeBlank
+	}
+	employee := NewEmployee(id)
+	employee.FirstName = firstName
+	employee.MiddleName = middleName
+	employee.LastName = lastName
+	employee.Email = email
+	employee.Gender = gender
+	employee.DateOfBirth = dateOfBirth
+	employee.HomeAddress = homeAddress
+	employee.PhoneNumber = phoneNumber
+	employee.Bank = bank
+	employee.AccountNumber = accountNumber
+	employee.GrossSalary = grossSalary
+	employee.NextOfKinName = nextOfKinName
+	employee.NextOfKinPhone = nextOfKinPhone
+	employee.ReferenceName = referenceName
+	employee.ReferencePhone = referencePhone
+	employee.Department = deptId
+	employee.Suspended = false
+	employee.Sacked = false
+	employee.Country = country
+	employee.password = password
+
+	employee.AddEvent(EmployeeCreatedEvent, &EmployeeCreated{
+		Employee: employee,
+	})
+
+	return employee, nil
+}
+func (Employee) Key() string {
+	return EmployeeAggregate
+}
+
+func (e *Employee) SuspendEmployee() error {
+	e.Suspended = true
+
+	e.AddEvent(EmployeeSuspendedEvent, &EmployeeSuspended{
+		Employee: e,
+	})
+	return nil
+}
+
+func (e *Employee) UnsuspendEmployee() error {
+	e.Suspended = false
+
+	e.AddEvent(EmployeeUnsuspendedEvent, &EmployeeUnsuspended{
+		Employee: e,
+	})
+	return nil
+}
+
+//
+//func (e *Employee) ChangeBankAccount() error  {
+//
+//}
