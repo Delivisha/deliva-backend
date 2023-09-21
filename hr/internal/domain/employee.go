@@ -9,19 +9,29 @@ const EmployeeAggregate = "hr.EmployeeAggregate"
 
 type Employee struct {
 	ddd.Aggregate
-	FirstName     string
-	MiddleName    string
-	LastName      string
-	DateOfBirth   string
-	HomeAddress   string
-	PhoneNumber   string
-	Bank          string
-	AccountNumber string
-	GrossSalary   int32
-	Department    string
-	Country       string
-	Suspended     bool
-	Sacked        bool
+	FirstName          string
+	MiddleName         string
+	LastName           string
+	Gender             string
+	DateOfBirth        string
+	Email              string
+	HomeAddress        string
+	PhoneNumber        string
+	Bank               string
+	AccountNumber      string
+	GrossSalary        int32
+	NextOfKinName      string
+	NextOfKinPhone     string
+	ReferenceName      string
+	ReferencePhone     string
+	Department         string
+	Country            string
+	Suspended          bool
+	SuspensionReason   string
+	SuspensionDuration string
+	Sacked             bool
+	SackedReason       string
+	password           string
 }
 
 var (

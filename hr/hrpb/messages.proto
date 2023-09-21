@@ -9,10 +9,11 @@ message DepartmentCreated {
   string name = 2;
   string head_of_department = 3;
   int32 number_of_employees = 4;
-  repeated DepartmentProject projects = 6;
+  int32 budget = 5;
 }
 message ProjectCreated {
-  DepartmentProject project = 1;
+  string dept_id = 1;
+  DepartmentProject project = 2;
 }
 message DepartmentProject {
   string id = 1;
@@ -28,17 +29,26 @@ message EmployeeCreated {
   string first_name = 2;
   string middle_name = 3;
   string last_name = 4;
-  string email = 5;
-  string date_of_birth = 6;
-  string home_address = 7;
-  string phone_number = 8;
-  string bank = 9;
-  string account_number = 10;
-  int32 gross_salary = 11;
-  string Department  = 12;
-  string Country = 13;
-  bool suspended = 14;
-  bool sacked = 15;
+  string gender = 5;
+  string email = 6;
+  string date_of_birth = 7;
+  string home_address = 8;
+  string phone_number = 9;
+  string bank = 10;
+  string account_number = 11;
+  int32 gross_salary = 12;
+  string next_of_kin_name = 13;
+  string next_of_kin_phone = 14;
+  string reference_name = 15;
+  string reference_phone = 16;
+  string dept_id  = 17;
+  string country = 18;
+  bool suspended = 19;
+  string suspension_reason = 20;
+  string suspension_duration = 21;
+  bool sacked = 22;
+  string sacked_reason = 23;
+  string password = 24;
 }
 
 message EmployeeSuspended {
