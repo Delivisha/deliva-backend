@@ -1,4 +1,8 @@
 -- +goose Up
+CREATE SCHEMA departments;
+
+SET search_path TO departments,public;
+
 CREATE TABLE departments (
     id                  text NOT NULL,
     name                text NOT NULL,
@@ -31,6 +35,7 @@ CREATE TABLE employees (
     CONSTRAINT FK_employee_department FOREIGN KEY(dept_id)
         REFERENCES departments(id)
 );
+
 CREATE TRIGGER created_at_employees_trgr
     BEFORE UPDATE
     ON employees
@@ -42,10 +47,9 @@ CREATE TRIGGER updated_at_employees_trgr
     FOR EACH ROW
     EXECUTE PROCEDURE updated_at_trigger();
 
-
 CREATE TABLE projects (
     id              text NOT NULL,
-    dept_id   text NOT NULL,
+    dept_id         text NOT NULL,
     name            text NOT NULL,
     duration        text NOT NULL,
     employee_id     text NOT NULL,
@@ -58,6 +62,11 @@ CREATE TABLE projects (
         REFERENCES departments(id)
 );
 
+CREATE TRIGGER updated_at_projects_trgr
+    BEFORE UPDATE
+    ON projects
+    FOR EACH ROW
+    EXECUTE PROCEDURE updated_at_trigger();
 
 CREATE TABLE events (
     stream_id      text        NOT NULL,
@@ -69,6 +78,7 @@ CREATE TABLE events (
     occurred_at    timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (stream_id, stream_name, stream_version)
 );
+
 CREATE TABLE snapshots (
     stream_id      text        NOT NULL,
     stream_name    text        NOT NULL,
@@ -82,8 +92,7 @@ CREATE TABLE snapshots (
 CREATE TRIGGER updated_at_snapshots_trgr
     BEFORE UPDATE
     ON snapshots
-    FOR EACH ROW
-EXECUTE PROCEDURE updated_at_trigger();
+    FOR EACH ROW EXECUTE PROCEDURE updated_at_trigger();
 
 CREATE TABLE inbox (
     id          text        NOT NULL,
@@ -106,31 +115,16 @@ CREATE TABLE outbox (
     published_at timestamptz,
     PRIMARY KEY (id)
 );
-CREATE INDEX unpublished_idx ON outbox (published_at) WHERE published_at IS NULL;
-
-CREATE TABLE sagas (
-    id           text        NOT NULL,
-    name         text        NOT NULL,
-    data         bytea       NOT NULL,
-    step         int         NOT NULL,
-    done         bool        NOT NULL,
-    compensating bool        NOT NULL,
-    updated_at   timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (id, name)
-);
-CREATE TRIGGER updated_at_sagas_trgr
-    BEFORE UPDATE
-    ON sagas
-    FOR EACH ROW
-EXECUTE PROCEDURE updated_at_trigger();
+CREATE INDEX departments_unpublished_idx ON outbox (published_at) WHERE published_at IS NULL;
 
 -- +goose Down
-DROP TABLE IF EXISTS departments;
-DROP TABLE IF EXISTS employees;
-DROP TABLE IF EXISTS projects;
-
-DROP TABLE IF EXISTS sagas;
-DROP TABLE IF EXISTS outbox;
-DROP TABLE IF EXISTS inbox;
-DROP TABLE IF EXISTS snapshots;
-DROP TABLE IF EXISTS events;
+DROP SCHEMA IF EXISTS departments CASCADE;
+-- SET SEARCH_PATH TO departments;
+--
+-- DROP TABLE IF EXISTS outbox;
+-- DROP TABLE IF EXISTS inbox;
+-- DROP TABLE IF EXISTS snapshots;
+-- DROP TABLE IF EXISTS events;
+-- DROP TABLE IF EXISTS employees;
+-- DROP TABLE IF EXISTS projects;
+-- DROP TABLE IF EXISTS departments;
