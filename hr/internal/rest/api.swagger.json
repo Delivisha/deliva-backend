@@ -252,12 +252,9 @@
           "type": "integer",
           "format": "int32"
         },
-        "projects": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/hrpbProject"
-          }
+        "budget": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
@@ -274,6 +271,9 @@
           "type": "string"
         },
         "lastName": {
+          "type": "string"
+        },
+        "gender": {
           "type": "string"
         },
         "email": {
@@ -298,17 +298,41 @@
           "type": "integer",
           "format": "int32"
         },
-        "Department": {
+        "nextOfKinName": {
           "type": "string"
         },
-        "Country": {
+        "nextOfKinPhone": {
+          "type": "string"
+        },
+        "referenceName": {
+          "type": "string"
+        },
+        "referencePhone": {
+          "type": "string"
+        },
+        "deptId": {
+          "type": "string"
+        },
+        "country": {
           "type": "string"
         },
         "suspended": {
           "type": "boolean"
         },
+        "suspensionReason": {
+          "type": "string"
+        },
+        "suspensionDuration": {
+          "type": "string"
+        },
         "sacked": {
           "type": "boolean"
+        },
+        "sackedReason": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
         }
       }
     },
@@ -317,31 +341,6 @@
       "properties": {
         "employee": {
           "$ref": "#/definitions/hrpbEmployee"
-        }
-      }
-    },
-    "hrpbProject": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "duration": {
-          "type": "string"
-        },
-        "numberOfEmployees": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "budget": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "resources": {
-          "type": "string"
         }
       }
     },

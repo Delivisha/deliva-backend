@@ -98,7 +98,18 @@ func (e *Employee) UnsuspendEmployee() error {
 	return nil
 }
 
-//
-//func (e *Employee) ChangeBankAccount() error  {
-//
-//}
+func (e *Employee) ChangeBankAccount(account string) error {
+	e.Bank = account
+	e.AddEvent(EmployeeBankAccountChangedEvent, &EmployeeBankAccountChanged{
+		Employee: e,
+	})
+	return nil
+}
+
+func (e *Employee) SackEmployee() error {
+	e.Sacked = true
+	e.AddEvent(EmployeeSackedEvent, &EmployeeSacked{
+		Employee: e,
+	})
+	return nil
+}

@@ -60,11 +60,13 @@ message EmployeeSuspended {
 message EmployeeUnsuspended {
   string id = 1;
 }
+message EmployeeBankAccountChanged {
+  string id = 1;
+  string account = 2;
+}
 message EmployeeSacked {
   string id = 1;
   string reason = 2;
 }
-
-
 
 // commands

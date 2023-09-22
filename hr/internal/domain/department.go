@@ -11,10 +11,10 @@ const (
 
 type Department struct {
 	ddd.Aggregate
-	name              string
-	headOfDepartment  string
-	numberOfEmployees int
-	budget            int32
+	Name              string
+	HeadOfDepartment  string
+	NumberOfEmployees int
+	Budget            int32
 }
 
 var (
@@ -32,8 +32,8 @@ func CreateDepartment(id, name, headOfDepartment string) (*Department, error) {
 		return nil, ErrNameCannotBeBlank
 	}
 	department := NewDepartment(id)
-	department.name = name
-	department.headOfDepartment = headOfDepartment
+	department.Name = name
+	department.HeadOfDepartment = headOfDepartment
 
 	department.AddEvent(DepartmentCreatedEvent, &DepartmentCreated{
 		Department: department,
@@ -43,7 +43,7 @@ func CreateDepartment(id, name, headOfDepartment string) (*Department, error) {
 }
 
 func (d *Department) UpdateNumberOfEmployees(employee int) error {
-	d.numberOfEmployees += employee
+	d.NumberOfEmployees += employee
 	d.AddEvent(NumberOfEmployeesUpdatedEvent, &NumberOfEmployeesUpdated{
 		Department: d,
 	})
@@ -51,7 +51,7 @@ func (d *Department) UpdateNumberOfEmployees(employee int) error {
 }
 
 func (d *Department) UpdateBudget(budget int32) error {
-	d.budget += budget
+	d.Budget += budget
 	d.AddEvent(BudgetUpdatedEvent, &BudgetUpdated{
 		Department: d,
 	})
