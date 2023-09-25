@@ -52,7 +52,8 @@
     },
     "/api/hr/{id}": {
       "get": {
-        "operationId": "HrService_GetEmployeeById",
+        "summary": "Get an  employee",
+        "operationId": "getEmployee",
         "responses": {
           "200": {
             "description": "A successful response.",
@@ -76,7 +77,7 @@
           }
         ],
         "tags": [
-          "HrService"
+          "Hr"
         ]
       }
     },
@@ -236,6 +237,14 @@
         }
       }
     },
+    "hrpbCreateProjectResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
     "hrpbDepartment": {
       "type": "object",
       "properties": {
@@ -341,6 +350,34 @@
       "properties": {
         "employee": {
           "$ref": "#/definitions/hrpbEmployee"
+        }
+      }
+    },
+    "hrpbProject": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "deptId": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "duration": {
+          "type": "string"
+        },
+        "numberOfEmployees": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "budget": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "resources": {
+          "type": "string"
         }
       }
     },

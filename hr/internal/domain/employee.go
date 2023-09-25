@@ -31,7 +31,7 @@ type Employee struct {
 	SuspensionDuration string
 	Sacked             bool
 	SackedReason       string
-	password           string
+	Password           string
 }
 
 var (
@@ -68,7 +68,7 @@ func CreateEmployee(id, firstName, middleName, lastName, gender, dateOfBirth, em
 	employee.Suspended = false
 	employee.Sacked = false
 	employee.Country = country
-	employee.password = password
+	employee.Password = password
 
 	employee.AddEvent(EmployeeCreatedEvent, &EmployeeCreated{
 		Employee: employee,

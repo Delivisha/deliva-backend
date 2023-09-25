@@ -5,10 +5,11 @@ package hrpb;
 service HrService {
   rpc CreateEmployee(CreateEmployeeRequest) returns (CreateEmployeeResponse) {}
   rpc CreateDepartment(CreateDepartmentRequest) returns (CreateDepartmentResponse) {}
+  rpc CreateProject(CreateProjectRequest) returns (CreateProjectResponse) {}
   rpc SuspendEmployee(SuspendEmployeeRequest) returns (SuspendEmployeeResponse) {}
   rpc SackEmployee(SackEmployeeRequest) returns (SackEmployeeResponse) {}
   rpc UnsuspendEmployee(UnsuspendEmployeeRequest) returns (UnsuspendEmployeeResponse) {}
-  rpc GetEmployeeById(GetEmployeeRequest) returns (GetEmployeeResponse) {}
+  rpc GetEmployee(GetEmployeeRequest) returns (GetEmployeeResponse) {}
 //  rpc GetAllEmployees(GetAllEmployeesRequest) returns (GetAllEmployeesResponse) {}
 //  rpc GetEmployeeByDepartment(GetEmployeeByDepartmentRequest) returns (GetEmployeeByDepartmentResponse) {}
 //  rpc GetEmployeesByGender(GetEmployeesByGenderRequest) returns (GetEmployeesByGenderResponse) {}
@@ -28,6 +29,14 @@ message CreateEmployeeRequest {
 }
 message  CreateEmployeeResponse {
   string id = 1;
+}
+
+message CreateProjectRequest {
+  Project project = 1;
+}
+
+message CreateProjectResponse{
+  string id  = 1;
 }
 message SuspendEmployeeRequest {
   string id = 1;

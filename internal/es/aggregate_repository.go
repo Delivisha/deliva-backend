@@ -21,7 +21,7 @@ func NewAggregateRepository[T EventSourcedAggregate](aggregateName string, regis
 	}
 }
 
-func (r AggregateRepository[T]) Find(ctx context.Context, aggregateID string) (agg T, err error) {
+func (r AggregateRepository[T]) Load(ctx context.Context, aggregateID string) (agg T, err error) {
 	var v any
 	v, err = r.registry.Build(
 		r.AggregateName,

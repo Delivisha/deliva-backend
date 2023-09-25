@@ -10,12 +10,13 @@ const (
 	DepartmentAggregateChannel = "deliva.hr.events.Hr"
 	ProjectAggregateChannel    = "deliva.hr.events.Hr"
 
-	DepartmentCreatedEvent   = "hrapi.DepartmentCreated"
-	ProjectCreatedEvent      = "hrapi.ProjectCreated"
-	EmployeeCreatedEvent     = "hrapi.EmployeeCreated"
-	EmployeeSuspendedEvent   = "hrapi.EmployeeSuspended"
-	EmployeeUnsuspendedEvent = "hrapi.EmployeeUnsuspended"
-	EmployeeSackedEvent      = "hrapi.EmployeeSacked"
+	DepartmentCreatedEvent          = "hrapi.DepartmentCreated"
+	ProjectCreatedEvent             = "hrapi.ProjectCreated"
+	EmployeeCreatedEvent            = "hrapi.EmployeeCreated"
+	EmployeeSuspendedEvent          = "hrapi.EmployeeSuspended"
+	EmployeeUnsuspendedEvent        = "hrapi.EmployeeUnsuspended"
+	EmployeeChangedBankAccountEvent = "hrapi.EmployeeBankAccountChanged"
+	EmployeeSackedEvent             = "hrapi.EmployeeSacked"
 
 	CommandChannel = "deliva.hr.commands"
 )

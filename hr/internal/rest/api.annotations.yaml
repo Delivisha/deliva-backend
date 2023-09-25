@@ -14,5 +14,5 @@ http:
     - selector: hrpb.HrService.SackEmployee
       put: /api/hr/{id}/sack
       body: "*"
-    - selector: hrpb.HrService.GetEmployeeById
+    - selector: hrpb.HrService.GetEmployee
       get: /api/hr/{id}

@@ -13,6 +13,12 @@ openapiOptions:
         tags:
           - Hr
         summary: Create a new employee
+    - method: hrpb.HrService.GetEmployee
+      option:
+        operationId: getEmployee
+        tags:
+          - Hr
+        summary: Get an  employee
     - method: hrpb.HrService.SuspendEmployee
       option:
         operationId: suspendEmployee

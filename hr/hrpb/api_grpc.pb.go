@@ -21,10 +21,11 @@ const _ = grpc.SupportPackageIsVersion7
 const (
 	HrService_CreateEmployee_FullMethodName    = "/hrpb.HrService/CreateEmployee"
 	HrService_CreateDepartment_FullMethodName  = "/hrpb.HrService/CreateDepartment"
+	HrService_CreateProject_FullMethodName     = "/hrpb.HrService/CreateProject"
 	HrService_SuspendEmployee_FullMethodName   = "/hrpb.HrService/SuspendEmployee"
 	HrService_SackEmployee_FullMethodName      = "/hrpb.HrService/SackEmployee"
 	HrService_UnsuspendEmployee_FullMethodName = "/hrpb.HrService/UnsuspendEmployee"
-	HrService_GetEmployeeById_FullMethodName   = "/hrpb.HrService/GetEmployeeById"
+	HrService_GetEmployee_FullMethodName       = "/hrpb.HrService/GetEmployee"
 )
 
 // HrServiceClient is the client API for HrService service.
@@ -33,10 +34,11 @@ const (
 type HrServiceClient interface {
 	CreateEmployee(ctx context.Context, in *CreateEmployeeRequest, opts ...grpc.CallOption) (*CreateEmployeeResponse, error)
 	CreateDepartment(ctx context.Context, in *CreateDepartmentRequest, opts ...grpc.CallOption) (*CreateDepartmentResponse, error)
+	CreateProject(ctx context.Context, in *CreateProjectRequest, opts ...grpc.CallOption) (*CreateProjectResponse, error)
 	SuspendEmployee(ctx context.Context, in *SuspendEmployeeRequest, opts ...grpc.CallOption) (*SuspendEmployeeResponse, error)
 	SackEmployee(ctx context.Context, in *SackEmployeeRequest, opts ...grpc.CallOption) (*SackEmployeeResponse, error)
 	UnsuspendEmployee(ctx context.Context, in *UnsuspendEmployeeRequest, opts ...grpc.CallOption) (*UnsuspendEmployeeResponse, error)
-	GetEmployeeById(ctx context.Context, in *GetEmployeeRequest, opts ...grpc.CallOption) (*GetEmployeeResponse, error)
+	GetEmployee(ctx context.Context, in *GetEmployeeRequest, opts ...grpc.CallOption) (*GetEmployeeResponse, error)
 }
 
 type hrServiceClient struct {
@@ -59,6 +61,15 @@ func (c *hrServiceClient) CreateEmployee(ctx context.Context, in *CreateEmployee
 func (c *hrServiceClient) CreateDepartment(ctx context.Context, in *CreateDepartmentRequest, opts ...grpc.CallOption) (*CreateDepartmentResponse, error) {
 	out := new(CreateDepartmentResponse)
 	err := c.cc.Invoke(ctx, HrService_CreateDepartment_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *hrServiceClient) CreateProject(ctx context.Context, in *CreateProjectRequest, opts ...grpc.CallOption) (*CreateProjectResponse, error) {
+	out := new(CreateProjectResponse)
+	err := c.cc.Invoke(ctx, HrService_CreateProject_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -92,9 +103,9 @@ func (c *hrServiceClient) UnsuspendEmployee(ctx context.Context, in *UnsuspendEm
 	return out, nil
 }
 
-func (c *hrServiceClient) GetEmployeeById(ctx context.Context, in *GetEmployeeRequest, opts ...grpc.CallOption) (*GetEmployeeResponse, error) {
+func (c *hrServiceClient) GetEmployee(ctx context.Context, in *GetEmployeeRequest, opts ...grpc.CallOption) (*GetEmployeeResponse, error) {
 	out := new(GetEmployeeResponse)
-	err := c.cc.Invoke(ctx, HrService_GetEmployeeById_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, HrService_GetEmployee_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -107,10 +118,11 @@ func (c *hrServiceClient) GetEmployeeById(ctx context.Context, in *GetEmployeeRe
 type HrServiceServer interface {
 	CreateEmployee(context.Context, *CreateEmployeeRequest) (*CreateEmployeeResponse, error)
 	CreateDepartment(context.Context, *CreateDepartmentRequest) (*CreateDepartmentResponse, error)
+	CreateProject(context.Context, *CreateProjectRequest) (*CreateProjectResponse, error)
 	SuspendEmployee(context.Context, *SuspendEmployeeRequest) (*SuspendEmployeeResponse, error)
 	SackEmployee(context.Context, *SackEmployeeRequest) (*SackEmployeeResponse, error)
 	UnsuspendEmployee(context.Context, *UnsuspendEmployeeRequest) (*UnsuspendEmployeeResponse, error)
-	GetEmployeeById(context.Context, *GetEmployeeRequest) (*GetEmployeeResponse, error)
+	GetEmployee(context.Context, *GetEmployeeRequest) (*GetEmployeeResponse, error)
 	mustEmbedUnimplementedHrServiceServer()
 }
 
@@ -124,6 +136,9 @@ func (UnimplementedHrServiceServer) CreateEmployee(context.Context, *CreateEmplo
 func (UnimplementedHrServiceServer) CreateDepartment(context.Context, *CreateDepartmentRequest) (*CreateDepartmentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateDepartment not implemented")
 }
+func (UnimplementedHrServiceServer) CreateProject(context.Context, *CreateProjectRequest) (*CreateProjectResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateProject not implemented")
+}
 func (UnimplementedHrServiceServer) SuspendEmployee(context.Context, *SuspendEmployeeRequest) (*SuspendEmployeeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SuspendEmployee not implemented")
 }
@@ -133,8 +148,8 @@ func (UnimplementedHrServiceServer) SackEmployee(context.Context, *SackEmployeeR
 func (UnimplementedHrServiceServer) UnsuspendEmployee(context.Context, *UnsuspendEmployeeRequest) (*UnsuspendEmployeeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UnsuspendEmployee not implemented")
 }
-func (UnimplementedHrServiceServer) GetEmployeeById(context.Context, *GetEmployeeRequest) (*GetEmployeeResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetEmployeeById not implemented")
+func (UnimplementedHrServiceServer) GetEmployee(context.Context, *GetEmployeeRequest) (*GetEmployeeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetEmployee not implemented")
 }
 func (UnimplementedHrServiceServer) mustEmbedUnimplementedHrServiceServer() {}
 
@@ -181,6 +196,24 @@ func _HrService_CreateDepartment_Handler(srv interface{}, ctx context.Context, d
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(HrServiceServer).CreateDepartment(ctx, req.(*CreateDepartmentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _HrService_CreateProject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateProjectRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(HrServiceServer).CreateProject(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: HrService_CreateProject_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(HrServiceServer).CreateProject(ctx, req.(*CreateProjectRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -239,20 +272,20 @@ func _HrService_UnsuspendEmployee_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _HrService_GetEmployeeById_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _HrService_GetEmployee_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetEmployeeRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(HrServiceServer).GetEmployeeById(ctx, in)
+		return srv.(HrServiceServer).GetEmployee(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: HrService_GetEmployeeById_FullMethodName,
+		FullMethod: HrService_GetEmployee_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(HrServiceServer).GetEmployeeById(ctx, req.(*GetEmployeeRequest))
+		return srv.(HrServiceServer).GetEmployee(ctx, req.(*GetEmployeeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -273,6 +306,10 @@ var HrService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _HrService_CreateDepartment_Handler,
 		},
 		{
+			MethodName: "CreateProject",
+			Handler:    _HrService_CreateProject_Handler,
+		},
+		{
 			MethodName: "SuspendEmployee",
 			Handler:    _HrService_SuspendEmployee_Handler,
 		},
@@ -285,8 +322,8 @@ var HrService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _HrService_UnsuspendEmployee_Handler,
 		},
 		{
-			MethodName: "GetEmployeeById",
-			Handler:    _HrService_GetEmployeeById_Handler,
+			MethodName: "GetEmployee",
+			Handler:    _HrService_GetEmployee_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -31,7 +31,10 @@ type (
 		SuspensionDuration string
 		Sacked             bool
 		SackedReason       string
-		password           string
+		Password           string
+	}
+	GetEmployee struct {
+		ID string
 	}
 	CreateDepartment struct {
 		ID                string
@@ -44,6 +47,7 @@ type (
 		ID       string
 		Name     string
 		Duration string
+		Lead     string
 		Budget   int32
 		Resource string
 	}
@@ -75,6 +79,7 @@ type (
 		CreateDepartment(ctx context.Context, createDept CreateDepartment) error
 		GetDepartment(ctx context.Context, getDept GetDepartment) (*domain.Department, error)
 		CreateEmployee(ctx context.Context, createEmp CreateEmployee) error
+		GetEmployee(ctx context.Context, getEmp GetEmployee) (*domain.Employee, error)
 		SuspendEmployee(ctx context.Context, suspend SuspendEmployee) error
 		UnsuspendEmployee(ctx context.Context, unsuspend UnsuspendEmployee) error
 		CreateProject(ctx context.Context, createPro CreateProject) error
@@ -138,7 +143,7 @@ func (a Application) CreateEmployee(ctx context.Context, createEmp CreateEmploye
 		createEmp.ReferencePhone,
 		createEmp.DeptID,
 		createEmp.Country,
-		createEmp.password,
+		createEmp.Password,
 	)
 	if err != nil {
 		return err
@@ -150,6 +155,9 @@ func (a Application) CreateEmployee(ctx context.Context, createEmp CreateEmploye
 		return err
 	}
 	return nil
+}
+func (a Application) GetEmployee(ctx context.Context, getEmp GetEmployee) (*domain.Employee, error) {
+	return a.employees.Find(ctx, getEmp.ID)
 }
 func (a Application) SuspendEmployee(ctx context.Context, suspend SuspendEmployee) error {
 	employee, err := a.employees.Find(ctx, suspend.ID)
@@ -185,7 +193,7 @@ func (a Application) UnsuspendEmployee(ctx context.Context, unsuspend UnsuspendE
 	return nil
 }
 func (a Application) CreateProject(ctx context.Context, createPro CreateProject) error {
-	project, err := domain.CreateProject(createPro.ID, createPro.Name, createPro.Duration, createPro.Resource, createPro.Budget)
+	project, err := domain.CreateProject(createPro.ID, createPro.Name, createPro.Duration, createPro.Lead, createPro.Resource, createPro.Budget)
 	if err != nil {
 		return err
 	}
